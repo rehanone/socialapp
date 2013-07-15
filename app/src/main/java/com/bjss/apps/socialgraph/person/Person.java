@@ -3,12 +3,13 @@ package com.bjss.apps.socialgraph.person;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.bjss.apps.socialgraph.entity.NameIdentifiable;
 import com.bjss.apps.socialgraph.message.Message;
 import com.bjss.apps.socialgraph.message.TextMessage;
 import com.bjss.apps.socialgraph.timeline.Timeline;
 import com.bjss.apps.socialgraph.timeline.Wall;
 
-public class Person implements Followable, Follower {
+public class Person extends NameIdentifiable implements Followable, Follower {
 
 	private final String name;
 
