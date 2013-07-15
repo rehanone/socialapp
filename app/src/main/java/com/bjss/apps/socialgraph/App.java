@@ -16,16 +16,15 @@ public class App {
 		bob.postMessage("at least it's sunny");
 
 		Thread.sleep(12000);
-		System.out.println(alice);
-		System.out.println(bob);
+		System.out.println(alice.getTimelineAsString());
+		System.out.println(bob.getTimelineAsString());
 
 		final Person charlie = new Person("Charlie");
 		charlie.postMessage("I'm in New York today! Anyone wants to have a coffee?");
-		charlie.follows(alice);
-		System.out.println(charlie.wall());
+		alice.addFollower(charlie);
+		System.out.println(charlie.getWallAsString());
 
-		charlie.follows(bob);
-		Thread.sleep(1100);
-		System.out.println(charlie.wall());
+		bob.addFollower(charlie);
+		System.out.println(charlie.getWallAsString());
 	}
 }

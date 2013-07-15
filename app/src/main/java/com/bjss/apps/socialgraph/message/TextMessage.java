@@ -7,18 +7,26 @@ import org.joda.time.Period;
 
 import com.bjss.apps.socialgraph.person.Person;
 
+/**
+ * TextMessage class provides implementation for Message interface for a message/status update in a
+ * social context. Each new instance of TextMessage gets assigned a timestamp and a unique id on it
+ * creation.
+ * 
+ * @author rehan.mahmood
+ * 
+ */
 public class TextMessage implements Message {
 
 	private final UUID id = UUID.randomUUID();
 
 	private final DateTime timestamp = new DateTime();
 
-	private final Person sender;
+	private final Person owner;
 
 	private final String message;
 
 	public TextMessage(final Person sender, final String message) {
-		this.sender = sender;
+		this.owner = sender;
 		this.message = message;
 	}
 
@@ -26,8 +34,8 @@ public class TextMessage implements Message {
 		return id;
 	}
 
-	public Person getSender() {
-		return sender;
+	public Person getOwner() {
+		return owner;
 	}
 
 	public String getMessage() {

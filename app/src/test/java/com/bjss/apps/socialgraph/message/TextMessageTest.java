@@ -24,4 +24,15 @@ public class TextMessageTest {
 		assertTrue(m1.getAge().toStandardDuration().getMillis() > 1200);
 		assertTrue(m2.getAge().toStandardDuration().getMillis() > 0);
 	}
+
+	@Test
+	public void testCompareTo() throws InterruptedException {
+		final Message m1 = new TextMessage(person, "m1");
+		Thread.sleep(1200);
+		final Message m2 = new TextMessage(person, "m2");
+
+		assertTrue(m1.compareTo(m2) < 0);
+		assertTrue(m1.compareTo(m1) == 0);
+		assertTrue(m2.compareTo(m1) > 0);
+	}
 }
