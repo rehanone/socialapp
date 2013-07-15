@@ -7,7 +7,7 @@ import org.joda.time.Period;
 
 import com.bjss.apps.socialgraph.person.Person;
 
-public interface Message {
+public interface Message extends Comparable<Message> {
 
 	UUID getId();
 

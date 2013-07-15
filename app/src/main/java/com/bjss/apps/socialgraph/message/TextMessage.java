@@ -43,4 +43,10 @@ public class TextMessage implements Message {
 		final Period age = new Period(timestamp, now);
 		return age;
 	}
+
+	public int compareTo(final Message o) {
+		final int timestampCompare = this.timestamp.compareTo(o.getTimestamp());
+
+		return timestampCompare == 0 ? this.id.compareTo(o.getId()) : timestampCompare;
+	}
 }

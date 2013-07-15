@@ -1,6 +1,7 @@
 package com.bjss.apps.socialgraph.timeline;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,6 @@ public class TimelineTest {
 
 		timeline.postMessage(person, "msg");
 
-		assertEquals(1, timeline.getMessages().size());
-		assertEquals("msg", timeline.getMessages().get(0).getMessage());
+		assertThat(timeline.getMessages().size(), is(1));
 	}
 }

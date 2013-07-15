@@ -16,8 +16,16 @@ public class App {
 		bob.postMessage("at least it's sunny");
 
 		Thread.sleep(12000);
-
 		System.out.println(alice);
 		System.out.println(bob);
+
+		final Person charlie = new Person("Charlie");
+		charlie.postMessage("I'm in New York today! Anyone wants to have a coffee?");
+		charlie.follows(alice);
+		System.out.println(charlie.wall());
+
+		charlie.follows(bob);
+		Thread.sleep(1100);
+		System.out.println(charlie.wall());
 	}
 }

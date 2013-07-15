@@ -1,7 +1,7 @@
 package com.bjss.apps.socialgraph.timeline;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.bjss.apps.socialgraph.message.Message;
 import com.bjss.apps.socialgraph.message.TextMessage;
@@ -10,14 +10,14 @@ import com.bjss.apps.socialgraph.utils.SocialPeriodFormatter;
 
 public class Timeline {
 
-	private final List<Message> messages = new LinkedList<Message>();
+	private final Set<Message> messages = new TreeSet<Message>();
 
 	public void postMessage(final Person person, final String message) {
 		final Message msg = new TextMessage(person, message);
 		messages.add(msg);
 	}
 
-	public List<Message> getMessages() {
+	public Set<Message> getMessages() {
 		return messages;
 	}
 
