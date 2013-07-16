@@ -1,4 +1,4 @@
-package com.bjss.apps.socialgraph.utils;
+package com.bjss.apps.socialgraph.formatter;
 
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;

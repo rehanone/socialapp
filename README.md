@@ -27,8 +27,17 @@ If your shell has the mvn and java on path, you can use these scripts build and 
 
 
 	$ ./build.sh
+
+Note: In Windows, use the .bat scripts
+
+Running
+------------------
+For running the app
+
 	$ ./run.sh
 
+Input samples are in app\src\test\resources\test.txt
+	
 Note: In Windows, use the .bat scripts
 
 Dependencies
