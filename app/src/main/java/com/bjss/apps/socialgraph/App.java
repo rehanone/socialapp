@@ -1,30 +1,34 @@
 package com.bjss.apps.socialgraph;
 
-import com.bjss.apps.socialgraph.person.Person;
-
+/**
+ * main application runner
+ * 
+ * @author rehan.mahmood
+ * 
+ */
 public class App {
 
 	public static void main(final String[] args) throws InterruptedException {
 
-		final Person alice = new Person("Alice");
-		alice.postMessage("I love the weather today");
+		final SocialOrchestrator orchestrator = new SocialOrchestrator();
+
+		orchestrator.run("Alice -> I love the weather today");
 		Thread.sleep(6400);
-
-		final Person bob = new Person("Bob");
-		bob.postMessage("Oh, we lost!");
+		orchestrator.run("Bob -> Oh, we lost!");
 		Thread.sleep(8900);
-		bob.postMessage("at least it's sunny");
-
+		orchestrator.run("Bob -> at least it's sunny");
 		Thread.sleep(12000);
-		System.out.println(alice.getTimelineAsString());
-		System.out.println(bob.getTimelineAsString());
-
-		final Person charlie = new Person("Charlie");
-		charlie.postMessage("I'm in New York today! Anyone wants to have a coffee?");
-		alice.addFollower(charlie);
-		System.out.println(charlie.getWallAsString());
-
-		bob.addFollower(charlie);
-		System.out.println(charlie.getWallAsString());
+		orchestrator.run("Alice");
+		orchestrator.run("Bob");
+		orchestrator.run("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+		orchestrator.run("Charlie follows Alice");
+		orchestrator.run("Charlie wall");
+		orchestrator.run("Charlie follows Bob");
+		orchestrator.run("Charlie wall");
+		orchestrator.run("Alice -> Just testing");
+		orchestrator.run("Alice wall");
+		orchestrator.run("Charlie wall");
+		orchestrator.run("Bob follows Alice");
+		orchestrator.run("Bob wall");
 	}
 }

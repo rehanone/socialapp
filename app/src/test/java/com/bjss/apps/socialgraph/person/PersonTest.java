@@ -15,6 +15,8 @@ import com.bjss.apps.socialgraph.message.Message;
 @RunWith(MockitoJUnitRunner.class)
 public class PersonTest {
 
+	private static final String ALICE_M1 = "I love the weather today";
+
 	private static final String BOB_M2 = "at least it's sunny";
 
 	private static final String BOB_M1 = "Oh, we lost!";
@@ -24,8 +26,6 @@ public class PersonTest {
 
 	@Mock
 	private Message message;
-
-	private static final String ALICE_M1 = "I love the weather today";
 
 	@Test
 	public void testPostMessage() {

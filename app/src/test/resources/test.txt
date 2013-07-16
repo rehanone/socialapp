@@ -1,0 +1,15 @@
+Alice -> I love the weather today
+Bob -> Oh, we lost!
+Bob -> at least it's sunny
+Alice
+Bob
+Charlie -> I'm in New York today! Anyone wants to have a coffee?
+Charlie follows Alice
+Charlie wall
+Charlie follows Bob
+Charlie wall
+Alice -> Just testing
+Alice wall
+Charlie wall
+Bob follows Alice
+Bob wall
