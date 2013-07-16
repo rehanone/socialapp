@@ -3,6 +3,7 @@ Bob -> Oh, we lost!
 Bob -> at least it's sunny
 Alice
 Bob
+# error input
 Charlie -> I'm in New York today! Anyone wants to have a coffee?
 Charlie follows Alice
 Charlie wall

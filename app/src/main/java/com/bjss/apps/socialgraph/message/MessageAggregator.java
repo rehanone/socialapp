@@ -1,4 +1,4 @@
-package com.bjss.apps.socialgraph.timeline;
+package com.bjss.apps.socialgraph.message;
 
 import java.util.Collections;
 import java.util.SortedSet;
@@ -7,12 +7,12 @@ import java.util.TreeSet;
 import com.bjss.apps.socialgraph.message.Message;
 
 /**
- * AbstractMessageAggregator provides an ordered collection of messages.
+ * MessageAggregator provides an ordered collection of messages.
  * 
  * @author rehan.mahmood
  * 
  */
-public abstract class AbstractMessageAggregator {
+public class MessageAggregator {
 
 	// Using TreeSet will store messages in there natural sort order (Datewise)
 	private final SortedSet<Message> messages = new TreeSet<Message>();
