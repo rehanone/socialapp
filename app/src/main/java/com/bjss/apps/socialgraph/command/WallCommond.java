@@ -22,7 +22,7 @@ public class WallCommond extends AbstractCommand {
 		final Person person = getPerson(name);
 
 		final StringBuilder sb = new StringBuilder();
-		for (final Message msg : person.getTimelineMessages()) {
+		for (final Message msg : person.getWallMessages()) {
 			sb.append(formatter.format(msg));
 		}
 
