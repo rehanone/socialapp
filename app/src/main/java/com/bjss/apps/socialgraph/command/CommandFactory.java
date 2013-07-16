@@ -1,5 +1,7 @@
 package com.bjss.apps.socialgraph.command;
 
+import org.springframework.stereotype.Component;
+
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
 
 /**
@@ -8,6 +10,7 @@ import com.bjss.apps.socialgraph.command.parser.ParserContext;
  * @author rehan.mahmood
  * 
  */
+@Component
 public class CommandFactory {
 
 	public Command getCommand(final ParserContext context) {

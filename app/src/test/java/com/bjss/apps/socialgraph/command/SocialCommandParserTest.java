@@ -1,62 +1,63 @@
 package com.bjss.apps.socialgraph.command;
 
-import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import com.bjss.apps.socialgraph.command.parser.ParserContext;
+import com.bjss.apps.socialgraph.command.parser.ParserFactory;
+import com.bjss.apps.socialgraph.command.parser.ParserState;
+
+@RunWith(MockitoJUnitRunner.class)
 public class SocialCommandParserTest {
 
-	@Test
-	public void testParse_read() {
-		final CommandParser parser = new SocialCommandParser();
+	@Mock
+	private CommandFactory commandFactory;
 
-		final Command command = parser.parse("Alice");
+	@Mock
+	private ParserFactory parserFactory;
 
-		assertTrue(command instanceof ReadCommond);
-	}
+	@Mock
+	private ParserContext context;
 
-	@Test
-	public void testParse_read_moreInput() {
-		final CommandParser parser = new SocialCommandParser();
+	@Mock
+	private ParserState state;
 
-		final Command command = parser.parse("Alice ignore this");
+	@Mock
+	private Command command;
 
-		assertTrue(command instanceof ReadCommond);
-	}
+	private CommandParser parser;
 
-	@Test
-	public void testParse_message() {
-		final CommandParser parser = new SocialCommandParser();
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
 
-		final Command command = parser.parse("Alice -> hello world!");
+		parser = new SocialCommandParser(commandFactory, parserFactory);
 
-		assertTrue(command instanceof MessageCommand);
-	}
-
-	@Test
-	public void testParse_follows() {
-		final CommandParser parser = new SocialCommandParser();
-
-		final Command command = parser.parse("Alice follows Bob");
-
-		assertTrue(command instanceof FollowCommond);
-	}
-
-	@Test
-	public void testParse_wall() {
-		final CommandParser parser = new SocialCommandParser();
-
-		final Command command = parser.parse("Alice wall");
-
-		assertTrue(command instanceof WallCommond);
+		when(parserFactory.createContext()).thenReturn(context);
+		when(parserFactory.createStartState()).thenReturn(state);
+		when(commandFactory.getCommand(context)).thenReturn(command);
+		when(state.parse(anyString(), eq(context))).thenReturn(state);
 	}
 
 	@Test
 	public void testParse_wall_moreInput() {
-		final CommandParser parser = new SocialCommandParser();
+		final Command result = parser.parse("Alice -> hello world!");
 
-		final Command command = parser.parse("Alice wall ignore this");
-
-		assertTrue(command instanceof WallCommond);
+		Assert.assertEquals(command, result);
+		verify(parserFactory, times(1)).createContext();
+		verify(parserFactory, times(1)).createStartState();
+		verify(state, times(4)).parse(anyString(), eq(context));
+		verify(commandFactory, times(1)).getCommand(context);
 	}
 }

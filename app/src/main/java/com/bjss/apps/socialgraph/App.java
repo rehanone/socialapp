@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * main application runner
  * 
@@ -12,9 +15,10 @@ import java.io.InputStreamReader;
  */
 public class App {
 
-	private final static SocialOrchestrator orchestrator = new SocialOrchestrator();
-
 	public static void main(final String[] args) throws InterruptedException {
+
+		final ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+		final SocialOrchestrator orchestrator = (SocialOrchestrator) context.getBean("socialOrchestrator");
 
 		final InputStreamReader converter = new InputStreamReader(System.in);
 		final BufferedReader in = new BufferedReader(converter);

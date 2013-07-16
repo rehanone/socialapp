@@ -1,14 +1,22 @@
 package com.bjss.apps.socialgraph;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.bjss.apps.socialgraph.command.Command;
 import com.bjss.apps.socialgraph.command.CommandParser;
-import com.bjss.apps.socialgraph.command.SocialCommandParser;
 
+@Component
 public class SocialOrchestrator {
 
-	final CommandParser parser = new SocialCommandParser();
+	private final CommandParser parser;
+
+	@Autowired
+	public SocialOrchestrator(final CommandParser parser) {
+		super();
+		this.parser = parser;
+	}
 
 	public void run(final String cmd) {
 		try {
