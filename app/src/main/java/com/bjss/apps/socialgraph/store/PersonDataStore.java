@@ -1,11 +1,14 @@
-package com.bjss.apps.socialgraph.command;
+package com.bjss.apps.socialgraph.store;
+
+import org.springframework.stereotype.Component;
 
 import com.bjss.apps.socialgraph.entity.CacheingPersonEAO;
 import com.bjss.apps.socialgraph.person.Person;
 
-public abstract class AbstractCommand implements Command {
+@Component
+public class PersonDataStore {
 
-	protected Person getPerson(final String name) {
+	public Person getPerson(final String name) {
 		Person person = getData().findByName(name);
 		if (person == null) {
 			person = new Person(name);

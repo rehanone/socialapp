@@ -1,10 +1,10 @@
 package com.bjss.apps.socialgraph.message.formatter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 
 import com.bjss.apps.socialgraph.formatter.SocialPeriodFormatter;
 import com.bjss.apps.socialgraph.message.Message;
-import com.bjss.apps.socialgraph.message.formatter.MessageFormatter;
 
 /**
  * Wall class provides formating to the messages aggregate, appropriate for a social wall.
@@ -12,6 +12,7 @@ import com.bjss.apps.socialgraph.message.formatter.MessageFormatter;
  * @author rehan.mahmood
  * 
  */
+@Component
 public class WallMessageFormatter implements MessageFormatter {
 
 	/**
