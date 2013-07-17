@@ -1,9 +1,9 @@
 package com.bjss.apps.socialgraph.command;
 
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
-import com.bjss.apps.socialgraph.message.Message;
+import com.bjss.apps.socialgraph.graph.entity.Message;
+import com.bjss.apps.socialgraph.graph.entity.Person;
 import com.bjss.apps.socialgraph.message.formatter.MessageFormatter;
-import com.bjss.apps.socialgraph.person.Person;
 import com.bjss.apps.socialgraph.store.PersonDataStore;
 
 public class WallCommond implements Command {

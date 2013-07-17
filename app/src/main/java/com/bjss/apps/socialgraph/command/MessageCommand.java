@@ -1,7 +1,7 @@
 package com.bjss.apps.socialgraph.command;
 
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
-import com.bjss.apps.socialgraph.person.Person;
+import com.bjss.apps.socialgraph.graph.entity.Person;
 import com.bjss.apps.socialgraph.store.PersonDataStore;
 
 public class MessageCommand implements Command {
@@ -20,6 +20,7 @@ public class MessageCommand implements Command {
 		final String name = context.getPersonName();
 		final Person person = store.getPerson(name);
 		person.postMessage(context.getMessage());
+		store.savePerson(person);
 		return "";
 	}
 }

@@ -15,9 +15,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
-import com.bjss.apps.socialgraph.message.Message;
+import com.bjss.apps.socialgraph.graph.entity.Message;
+import com.bjss.apps.socialgraph.graph.entity.Person;
 import com.bjss.apps.socialgraph.message.formatter.MessageFormatter;
-import com.bjss.apps.socialgraph.person.Person;
 import com.bjss.apps.socialgraph.store.PersonDataStore;
 import com.google.common.collect.Sets;
 

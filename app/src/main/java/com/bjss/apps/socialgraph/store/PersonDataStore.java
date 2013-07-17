@@ -1,23 +1,33 @@
 package com.bjss.apps.socialgraph.store;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.bjss.apps.socialgraph.entity.CacheingPersonEAO;
-import com.bjss.apps.socialgraph.person.Person;
+import com.bjss.apps.socialgraph.graph.entity.Person;
+import com.bjss.apps.socialgraph.graph.entity.PersonService;
 
-@Component
+@Service
 public class PersonDataStore {
 
+	private final PersonService personService;
+
+	@Autowired
+	public PersonDataStore(final PersonService personService) {
+		this.personService = personService;
+	}
+
+	@Transactional
 	public Person getPerson(final String name) {
-		Person person = getData().findByName(name);
+		Person person = personService.findByName(name);
 		if (person == null) {
 			person = new Person(name);
-			getData().save(person);
+			person = personService.save(person);
 		}
 		return person;
 	}
 
-	private CacheingPersonEAO getData() {
-		return CacheingPersonEAO.getInstance();
+	public void savePerson(final Person person) {
+		personService.save(person);
 	}
 }

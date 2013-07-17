@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.bjss.apps.socialgraph.formatter.SocialPeriodFormatter;
-import com.bjss.apps.socialgraph.message.Message;
+import com.bjss.apps.socialgraph.graph.entity.Message;
 
 /**
  * TimelineMessageFormatter class provides formating to the message, appropriate for a social

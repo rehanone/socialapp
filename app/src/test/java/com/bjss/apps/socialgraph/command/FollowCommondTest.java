@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
-import com.bjss.apps.socialgraph.person.Person;
+import com.bjss.apps.socialgraph.graph.entity.Person;
 import com.bjss.apps.socialgraph.store.PersonDataStore;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -40,6 +40,7 @@ public class FollowCommondTest {
 		final Command command = new FollowCommond(store, context);
 		command.execute();
 
-		verify(bob, times(1)).addFollower(alice);
+		verify(alice, times(1)).follow(bob);
+		verify(store, times(1)).savePerson(alice);
 	}
 }

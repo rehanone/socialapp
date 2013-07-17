@@ -1,7 +1,7 @@
 package com.bjss.apps.socialgraph.command;
 
 import com.bjss.apps.socialgraph.command.parser.ParserContext;
-import com.bjss.apps.socialgraph.person.Person;
+import com.bjss.apps.socialgraph.graph.entity.Person;
 import com.bjss.apps.socialgraph.store.PersonDataStore;
 
 public class FollowCommond implements Command {
@@ -21,7 +21,8 @@ public class FollowCommond implements Command {
 		final String secondName = context.getSecondPersonName();
 		final Person firstPerson = store.getPerson(firstName);
 		final Person secondPerson = store.getPerson(secondName);
-		secondPerson.addFollower(firstPerson);
+		firstPerson.follow(secondPerson);
+		store.savePerson(firstPerson);
 		return "";
 	}
 }

@@ -1,9 +1,7 @@
-package com.bjss.apps.socialgraph;
+package com.bjss.apps.socialgraph.graph.entity;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import static org.junit.Assert.assertTrue;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = "classpath:beans.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class SocialOrchestratorTest {
+public class MessageTest {
 
 	@Autowired
-	private SocialOrchestrator orchestrator;
+	private PersonService personService;
 
 	@Autowired
 	private Neo4jTemplate template;
@@ -33,19 +31,15 @@ public class SocialOrchestratorTest {
 	}
 
 	@Test
-	public void testRunWithErrorInputHandling() {
-		final String input = readInput();
-		final String[] contents = input.split("\n");
+	public void testCompareTo() throws InterruptedException {
+		final Person alice = personService.save(new Person("Alice"));
+		final Person bob = personService.save(new Person("Bob"));
+		final Message alice_msg = template.save(new Message(alice, "alice_msg"));
+		Thread.sleep(1200);
+		final Message bob_msg = template.save(new Message(bob, "bob_msg"));
 
-		for (final String token : contents) {
-			final String newToken = StringUtils.stripEnd(token, "\r");
-			orchestrator.run(newToken);
-		}
-	}
-
-	private String readInput() {
-		final InputStream in = this.getClass().getResourceAsStream("/test.txt");
-		final String input = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
-		return input;
+		assertTrue(alice_msg.compareTo(bob_msg) < 0);
+		assertTrue(alice_msg.compareTo(alice_msg) == 0);
+		assertTrue(bob_msg.compareTo(alice_msg) > 0);
 	}
 }

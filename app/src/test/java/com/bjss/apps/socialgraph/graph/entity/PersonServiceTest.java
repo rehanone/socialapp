@@ -1,9 +1,7 @@
-package com.bjss.apps.socialgraph;
+package com.bjss.apps.socialgraph.graph.entity;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = "classpath:beans.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class SocialOrchestratorTest {
+public class PersonServiceTest {
 
 	@Autowired
-	private SocialOrchestrator orchestrator;
+	private PersonService service;
 
 	@Autowired
 	private Neo4jTemplate template;
@@ -33,19 +31,12 @@ public class SocialOrchestratorTest {
 	}
 
 	@Test
-	public void testRunWithErrorInputHandling() {
-		final String input = readInput();
-		final String[] contents = input.split("\n");
+	@Transactional
+	public void persistedMovieShouldBeRetrievableFromGraphDb() {
+		final Person bob = service.save(new Person("Bob"));
+		final Person retrievedPerson = template.findOne(bob.getId(), Person.class);
 
-		for (final String token : contents) {
-			final String newToken = StringUtils.stripEnd(token, "\r");
-			orchestrator.run(newToken);
-		}
-	}
-
-	private String readInput() {
-		final InputStream in = this.getClass().getResourceAsStream("/test.txt");
-		final String input = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
-		return input;
+		assertEquals("retrieved person matches persisted one", bob, retrievedPerson);
+		assertEquals("retrieved person name matches", "Bob", retrievedPerson.getName());
 	}
 }

@@ -4,3 +4,4 @@ target/
 .project
 dist/
 /*.*~
+neo4j-db/

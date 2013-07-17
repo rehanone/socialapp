@@ -11,12 +11,14 @@ import java.util.List;
  */
 public abstract class NameIdentifiableEAO<E extends NameIdentifiable> implements IdentifiableEAO<String, E> {
 
+	@Override
 	public E findById(final String id) {
 		return findByName(id);
 	}
 
 	abstract public E findByName(String name);
 
+	@Override
 	abstract public List<E> findAll();
 
 	abstract E save(E entity);

@@ -1,1 +1,1 @@
-java -jar dist\socialgraph-1.0-SNAPSHOT.jar
+java -jar dist\socialgraph-1.0-SNAPSHOT-executable.jar
