@@ -27,7 +27,8 @@ public class PersonDataStore {
 		return person;
 	}
 
-	public void savePerson(final Person person) {
-		personService.save(person);
+	@Transactional
+	public Person savePerson(final Person person) {
+		return personService.save(person);
 	}
 }

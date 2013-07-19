@@ -1,8 +1,6 @@
 package com.bjss.apps.socialgraph.graph.entity;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
@@ -10,6 +8,8 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+
+import com.google.common.collect.Sets;
 
 @NodeEntity
 public class Person {
@@ -24,11 +24,11 @@ public class Person {
 
 	@Fetch
 	@RelatedTo(type = OWN, direction = Direction.INCOMING)
-	private final Set<Message> timeline = new HashSet<Message>();
+	private Set<Message> timeline;
 
 	@Fetch
 	@RelatedTo(direction = Direction.BOTH, elementClass = Person.class)
-	private final Set<Person> following = new HashSet<Person>();
+	private Set<Person> following;
 
 	public Person() {
 	}
@@ -46,14 +46,12 @@ public class Person {
 	}
 
 	public Set<Message> getTimelineMessages() {
-		final Set<Message> timeline = new TreeSet<Message>();
-		timeline.addAll(this.timeline);
 		return timeline;
 	}
 
 	public Set<Message> getWallMessages() {
-		final Set<Message> wall = new TreeSet<Message>();
-		wall.addAll(getTimelineMessages());
+		final Set<Message> wall = Sets.newTreeSet();
+		wall.addAll(timeline);
 		for (final Person f : following) {
 			wall.addAll(f.getTimelineMessages());
 		}
