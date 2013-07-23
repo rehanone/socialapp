@@ -1,4 +1,4 @@
-package com.bjss.apps.socialgraph;
+package com.bjss.apps.socialgraph.command;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,12 @@ import com.bjss.apps.socialgraph.command.Command;
 import com.bjss.apps.socialgraph.command.CommandParser;
 
 @Component
-public class SocialOrchestrator {
+public class CommandExecutor {
 
 	private final CommandParser parser;
 
 	@Autowired
-	public SocialOrchestrator(final CommandParser parser) {
+	public CommandExecutor(final CommandParser parser) {
 		super();
 		this.parser = parser;
 	}

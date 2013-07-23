@@ -20,9 +20,9 @@ import com.bjss.apps.socialgraph.command.parser.ParserState;
 @Component
 public class SocialCommandParser implements CommandParser {
 
-	private final CommandFactory commandFactory;
-
 	private final ParserFactory parserFactory;
+
+	private final CommandFactory commandFactory;
 
 	@Autowired
 	public SocialCommandParser(final CommandFactory commandFactory, final ParserFactory parserContextFactory) {

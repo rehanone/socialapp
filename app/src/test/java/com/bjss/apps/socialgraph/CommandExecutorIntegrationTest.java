@@ -15,13 +15,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bjss.apps.socialgraph.command.CommandExecutor;
+
 @ContextConfiguration(locations = "classpath:beans.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class SocialOrchestratorTest {
+public class CommandExecutorIntegrationTest {
 
 	@Autowired
-	private SocialOrchestrator orchestrator;
+	private CommandExecutor executor;
 
 	@Autowired
 	private Neo4jTemplate template;
@@ -39,7 +41,7 @@ public class SocialOrchestratorTest {
 
 		for (final String token : contents) {
 			final String newToken = StringUtils.stripEnd(token, "\r");
-			orchestrator.run(newToken);
+			executor.run(newToken);
 		}
 	}
 
