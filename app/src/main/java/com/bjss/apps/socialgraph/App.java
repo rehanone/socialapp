@@ -14,7 +14,7 @@ public class App {
 	public static void main(final String[] args) throws InterruptedException {
 
 		final ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-		final AppOrchestrator orchestrator = (AppOrchestrator) context.getBean("appOrchestrator");
+		final AppOrchestrator orchestrator = context.getBean("appOrchestrator", AppOrchestrator.class);
 
 		orchestrator.run();
 	}

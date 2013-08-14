@@ -61,7 +61,7 @@ public class Message implements Comparable<Message> {
 	public int compareTo(final Message o) {
 		final int timestampCompare = this.timestamp.compareTo(o.getTimestamp());
 
-		return timestampCompare == 0 ? this.id.compareTo(o.getId()) : timestampCompare;
+		return timestampCompare == 0 && this.id != null ? this.id.compareTo(o.getId()) : timestampCompare;
 	}
 
 	transient private Integer hash;

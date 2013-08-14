@@ -1,45 +1,59 @@
 package com.bjss.apps.socialgraph.graph.entity;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.neo4j.support.Neo4jTemplate;
-import org.springframework.data.neo4j.support.node.Neo4jHelper;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.BeforeTransaction;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-@ContextConfiguration(locations = "classpath:beans.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
+@RunWith(MockitoJUnitRunner.class)
 public class MessageTest {
 
-	@Autowired
-	private PersonService personService;
+	private static final String ALICE_MSG = "alice_msg";
+	private static final String BOB_MSG = "bob_msg";
 
-	@Autowired
-	private Neo4jTemplate template;
+	@Mock
+	private Person alice;
 
-	@Rollback(false)
-	@BeforeTransaction
-	public void cleanUpGraph() {
-		Neo4jHelper.cleanDb(template);
+	@Mock
+	private Person bob;
+
+	private Message alice_msg;
+	private Message bob_msg;
+
+	@Before
+	public void setUp() throws InterruptedException {
+		alice_msg = new Message(alice, ALICE_MSG);
+		Thread.sleep(1200);
+		bob_msg = new Message(bob, BOB_MSG);
 	}
 
 	@Test
-	public void testCompareTo() throws InterruptedException {
-		final Person alice = personService.save(new Person("Alice"));
-		final Person bob = personService.save(new Person("Bob"));
-		final Message alice_msg = template.save(new Message(alice, "alice_msg"));
-		Thread.sleep(1200);
-		final Message bob_msg = template.save(new Message(bob, "bob_msg"));
+	public void compare_should_return_less_then_zero_for_earlier_message() {
 
-		assertTrue(alice_msg.compareTo(bob_msg) < 0);
-		assertTrue(alice_msg.compareTo(alice_msg) == 0);
-		assertTrue(bob_msg.compareTo(alice_msg) > 0);
+		final int result = alice_msg.compareTo(bob_msg);
+
+		assertThat("Alice's message should be older than Bob's message", result, lessThan(0));
+	}
+
+	@Test
+	public void compare_should_return_zero_for_same_message() {
+
+		final int result = alice_msg.compareTo(alice_msg);
+
+		assertThat("Alice's message should be equal to her own message", result, equalTo(0));
+	}
+
+	@Test
+	public void compare_should_return_greater_then_zero_for_later_message() {
+
+		final int result = bob_msg.compareTo(alice_msg);
+
+		assertThat("Bob's message should be greater then Alice's message", result, greaterThan(0));
 	}
 }
